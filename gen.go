@@ -23,7 +23,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/bojanz/currency"
+	"github.com/rainforestpay/currency"
 )
 
 const assetDir = "raw"
@@ -151,7 +151,8 @@ type currencyFormat struct {
 }
 
 func (f currencyFormat) GoString() string {
-	return fmt.Sprintf("{%q, %d, %d, %d, %d, %q, %q, %q, %q}", f.pattern, f.numberingSystem, f.minGroupingDigits, f.primaryGroupingSize, f.secondaryGroupingSize, f.decimalSeparator, f.groupingSeparator, f.plusSign, f.minusSign)
+	return fmt.Sprintf("{%q, %d, %d, %d, %d, %q, %q, %q, %q}", f.pattern, f.numberingSystem, f.minGroupingDigits, f.primaryGroupingSize,
+		f.secondaryGroupingSize, f.decimalSeparator, f.groupingSeparator, f.plusSign, f.minusSign)
 }
 
 func main() {

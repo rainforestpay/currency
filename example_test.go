@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/bojanz/currency"
+	"github.com/rainforestpay/currency"
 )
 
 func ExampleNewAmount() {
