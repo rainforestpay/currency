@@ -304,10 +304,10 @@ func (a *Amount) UnmarshalBinary(data []byte) error {
 // MarshalJSON implements the json.Marshaler interface.
 func (a Amount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
-		Number       string `json:"number"`
-		CurrencyCode string `json:"currency"`
+		Number       json.Number `json:"number"`
+		CurrencyCode string      `json:"currency"`
 	}{
-		Number:       a.Number(),
+		Number:       json.Number(a.Number()),
 		CurrencyCode: a.CurrencyCode(),
 	})
 }
@@ -315,16 +315,16 @@ func (a Amount) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements the json.Unmarshaler interface.
 func (a *Amount) UnmarshalJSON(data []byte) error {
 	aux := struct {
-		Number       string `json:"number"`
-		CurrencyCode string `json:"currency"`
+		Number       json.Number `json:"number"`
+		CurrencyCode string      `json:"currency"`
 	}{}
 	err := json.Unmarshal(data, &aux)
 	if err != nil {
 		return err
 	}
 	number := apd.Decimal{}
-	if _, _, err := number.SetString(aux.Number); err != nil {
-		return InvalidNumberError{aux.Number}
+	if _, _, err := number.SetString(string(aux.Number)); err != nil {
+		return InvalidNumberError{string(aux.Number)}
 	}
 	if aux.CurrencyCode == "" || !IsValid(aux.CurrencyCode) {
 		return InvalidCurrencyCodeError{aux.CurrencyCode}
